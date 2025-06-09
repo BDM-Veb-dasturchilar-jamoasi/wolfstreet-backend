@@ -43,7 +43,8 @@ ReleaseRequestModel.init({
     },
     scheduled_approval_date: {
         type: DataTypes.DATE,
-        allowNull: true
+        allowNull: true,
+        index: true // Add index for faster queries
     },
     datetime: {
         type: DataTypes.INTEGER,

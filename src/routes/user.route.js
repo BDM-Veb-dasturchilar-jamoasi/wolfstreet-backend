@@ -6,7 +6,7 @@ const Role = require('../utils/userRoles.utils');
 const awaitHandlerFactory = require('../middleware/awaitHandlerFactory.middleware');
 const joiMiddleware = require('../middleware/joi.middleware');
 const { userSchemas } = require('../middleware/validators/userValidator.middleware');
-
+const statistikacontroller = require('../controllers/DashboardController')
 
 router.get('/', auth(), awaitHandlerFactory(userController.getAll));
 router.get('/id/:id', auth(), awaitHandlerFactory(userController.getById));
@@ -16,7 +16,7 @@ router.post('/', joiMiddleware(userSchemas.create), awaitHandlerFactory(userCont
 router.patch('/id/:id', auth(Role.Admin), joiMiddleware(userSchemas.update), awaitHandlerFactory(userController.update));
 router.delete('/id/:id', auth(Role.Admin), awaitHandlerFactory(userController.delete));
 router.get('/check-token', auth(), awaitHandlerFactory(userController.checkToken));
-
+router.get('/dashboard/stats', auth(), awaitHandlerFactory(statistikacontroller.getStats))
 router.post('/login', joiMiddleware(userSchemas.login), awaitHandlerFactory(userController.userLogin));
 
 module.exports = router;

@@ -6,14 +6,14 @@ const Role = require('../utils/userRoles.utils');
 const awaitHandlerFactory = require('../middleware/awaitHandlerFactory.middleware');
 
 // Existing routes
-router.get('/', auth(), awaitHandlerFactory(paymentcontroller.getAll));
-router.get('/id/:id', auth(), awaitHandlerFactory(paymentcontroller.getById));
-router.post('/', auth(), awaitHandlerFactory(paymentcontroller.create));
-router.patch('/id/:id', auth(), awaitHandlerFactory(paymentcontroller.update));
-router.delete('/id/:id', auth(Role.Admin), awaitHandlerFactory(paymentcontroller.delete));
+router.get('/', auth(Role.Admin, Role.Programmer, Role.Manager, Role.Bugalter), awaitHandlerFactory(paymentcontroller.getAll));
+router.get('/id/:id', auth(Role.Admin, Role.Programmer, Role.Manager, Role.Bugalter), awaitHandlerFactory(paymentcontroller.getById));
+router.post('/', auth(Role.Admin, Role.Programmer, Role.Manager, Role.Bugalter), awaitHandlerFactory(paymentcontroller.create));
+router.patch('/id/:id', auth(Role.Admin, Role.Programmer, Role.Manager, Role.Bugalter), awaitHandlerFactory(paymentcontroller.update));
+router.delete('/id/:id', auth(Role.Admin, Role.Programmer, Role.Manager, Role.Bugalter), awaitHandlerFactory(paymentcontroller.delete));
 
 // ✅ New report routes
-router.post('/report/by-date', auth(), awaitHandlerFactory(paymentcontroller.reportByDateRange));
-router.post('/report/by-student', auth(), awaitHandlerFactory(paymentcontroller.reportByStudentId));
+router.post('/report/by-date', auth(Role.Admin, Role.Programmer, Role.Manager, Role.Bugalter), awaitHandlerFactory(paymentcontroller.reportByDateRange));
+router.post('/report/by-student', auth(Role.Admin, Role.Programmer, Role.Manager, Role.Bugalter), awaitHandlerFactory(paymentcontroller.reportByStudentId));
 
 module.exports = router;
