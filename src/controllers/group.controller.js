@@ -71,6 +71,35 @@ class GroupController extends BaseController {
 
         res.send(group);
     };
+    getByTeacherId = async (req, res, next) => {
+        const { id } = req.params;
+
+        if (!id) {
+            throw new HttpException(400, req.mf('id is required'));
+        }
+
+        const groups = await GroupModel.findAll({
+            where: { teacherId: id },
+            include: [
+                {
+                    model: ScheduleModel,
+                    as: 'schedule'
+                },
+                {
+                    model: UserModel,
+                    as: 'teacher',
+                    attributes: ['id', 'fullname']
+                },
+                {
+                    model: UserModel,
+                    as: 'admin',
+                    attributes: ['id', 'fullname']
+                }
+            ]
+        });
+
+        res.send(groups);
+    };
 
     create = async (req, res, next) => {
         this.checkValidation(req);

@@ -4,10 +4,10 @@ const ReleaseRequest = require('./models/request.model');
 const Chiqim = require('./models/rasxod.model');
 const sequelize = require('./db/db-sequelize');
 
-console.log('⏰ Cron scheduler initialized');
+// console.log('⏰ Cron scheduler initialized');
 
-cron.schedule('*/1 * * * *', async () => {
-    console.log('🔍 Checking for delayed requests...');
+cron.schedule('*/10 * * * *', async () => {
+    // console.log('🔍 Checking for delayed requests...');
     try {
         const now = new Date();
 
@@ -35,7 +35,7 @@ cron.schedule('*/1 * * * *', async () => {
                 await request.save({ transaction });
 
                 await transaction.commit();
-                console.log(`✅ Approved request ID: ${request.id}`);
+                // console.log(`✅ Approved request ID: ${request.id}`);
             } catch (error) {
                 console.error(`❌ Failed request ID ${request.id}:`, error);
             }

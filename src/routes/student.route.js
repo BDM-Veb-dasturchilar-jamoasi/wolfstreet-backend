@@ -11,7 +11,7 @@ const upload = require('../middleware/upload'); // <-- Multer middleware for ima
 router.get('/', auth(), awaitHandlerFactory(studentController.getAll));
 
 // Get student by ID
-router.get('/id/:id', auth(), awaitHandlerFactory(studentController.getById));
+router.get('/id/:id', auth(), awaitHandlerFactory(studentController.getOne));
 
 // Get students by group ID
 router.get('/by-group/:group_id', auth(), awaitHandlerFactory(studentController.getByGroupId));

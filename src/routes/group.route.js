@@ -10,5 +10,6 @@ router.get('/id/:id', auth(Role.Admin, Role.Programmer, Role.Manager, Role.Teach
 router.post('/', auth(Role.Admin, Role.Programmer, Role.Manager, Role.Teacher), awaitHandlerFactory(groupController.create));
 router.patch('/id/:id', auth(Role.Admin, Role.Programmer, Role.Manager, Role.Teacher), awaitHandlerFactory(groupController.update));
 router.delete('/id/:id', auth(Role.Admin, Role.Programmer, Role.Manager, Role.Teacher), awaitHandlerFactory(groupController.delete));
+router.get('/by-teacher/:id', auth(Role.Admin, Role.Programmer, Role.Manager, Role.Teacher), awaitHandlerFactory(groupController.getByTeacherId));
 
 module.exports = router;

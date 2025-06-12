@@ -23,6 +23,16 @@ InvestorModel.init({
     fullname: {
         type: DataTypes.STRING(50),
         allowNull: false
+    },
+    isActive: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true
+    },
+    isWhite: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     }
 }, {
     sequelize,
@@ -31,7 +41,7 @@ InvestorModel.init({
     timestamps: true
 });
 
-
+// Associations
 InvestorModel.belongsTo(UserModel, {
     foreignKey: 'user_id',
     as: 'user'

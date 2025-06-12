@@ -190,6 +190,7 @@ class ChiqimController extends BaseController {
             return {
                 investor_id,
                 fullname: investor.fullname,
+                IsWhite: investor.isWhite,
                 invested,
                 profit,
                 loss,

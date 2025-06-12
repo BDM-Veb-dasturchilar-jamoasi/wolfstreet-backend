@@ -56,11 +56,10 @@ class InvestorController extends BaseController {
         res.send(investor);
     };
 
-    // Create new investor
     create = async (req, res, next) => {
         this.checkValidation(req);
 
-        const { user_id, fullname } = req.body;
+        const { user_id, fullname, isActive = true, isWhite = false } = req.body;
 
         // Check if user exists
         const user = await UserModel.findOne({ where: { id: user_id } });
@@ -70,12 +69,13 @@ class InvestorController extends BaseController {
 
         const investor = await InvestorModel.create({
             user_id,
-            fullname
+            fullname,
+            isActive: isActive === 'true' || isActive === true,
+            isWhite: isWhite === 'true' || isWhite === true
         });
 
         res.status(201).send(investor);
     };
-
     // Update investor
     update = async (req, res, next) => {
         this.checkValidation(req);
@@ -88,8 +88,11 @@ class InvestorController extends BaseController {
             throw new HttpException(404, req.mf('data not found'));
         }
 
-        const { fullname } = req.body;
+        const { fullname, isActive, isWhite } = req.body;
+
         if (fullname) investor.fullname = fullname;
+        if (isActive !== undefined) investor.isActive = isActive === 'true' || isActive === true;
+        if (isWhite !== undefined) investor.isWhite = isWhite === 'true' || isWhite === true;
 
         await investor.save();
         res.send(investor);

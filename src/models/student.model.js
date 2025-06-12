@@ -37,7 +37,7 @@ StudentModel.init({
         field: 'qarzSumma'
     },
 
-    // New fields
+    // Additional fields
     birthdate: {
         type: DataTypes.DATEONLY,
         allowNull: true,
@@ -92,13 +92,36 @@ StudentModel.init({
         defaultValue: true,
         field: 'parent_agreement'
     },
+    memberofvipchannel: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        field: 'memberofvipchannel'
+    },
+    has_indicator: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        field: 'has_indicator'
+    },
+
+    // 🔹 New boolean columns
+    isActive: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
+        field: 'isActive'
+    },
+    isWhite: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+        field: 'isWhite'
+    }
 
 }, {
     sequelize,
     modelName: 'StudentModel',
     tableName: 'students',
     timestamps: true
-
 });
 
 // Associations
