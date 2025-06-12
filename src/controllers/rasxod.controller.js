@@ -148,6 +148,7 @@ class ChiqimController extends BaseController {
         res.send({
             investor_id,
             fullname: investor.fullname,
+            IsWhite: investor.IsWhite,
             invested,
             profit,
             loss,
@@ -157,7 +158,7 @@ class ChiqimController extends BaseController {
     getAllInvestorsCurrentBalance = async (req, res, next) => {
         // Fetch all investors
         const investors = await InvestorModel.findAll({
-            attributes: ['id', 'fullname']
+            attributes: ['id', 'fullname', 'isWhite']
         });
 
         // For each investor, calculate their balance
@@ -190,7 +191,7 @@ class ChiqimController extends BaseController {
             return {
                 investor_id,
                 fullname: investor.fullname,
-                IsWhite: investor.isWhite,
+                isWhite: investor.isWhite,
                 invested,
                 profit,
                 loss,
